@@ -74,7 +74,7 @@ function platform_calculate_passenger_movement(vx, vy) {
 
             var hit = do_raycast(rx, ry, 0, dir_y, rl);
             // Only care about passenger objects (not solid geometry)
-            if (hit.hit && hit.dist != 0) {
+            if (hit.hit && hit.distance != 0) {
                 var pid = hit.inst;
                 if (object_is_ancestor(pid.object_index, par_solid)) continue; // skip terrain
                 if (!object_is_ancestor(pid.object_index, obj_player) && pid.object_index != obj_player) continue;
