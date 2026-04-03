@@ -1,0 +1,106 @@
+{
+  "resourceType": "GMProject",
+  "resourceVersion": "1.7",
+  "name": "2DPlatformer_E13",
+  "AudioGroups": [
+    {
+      "resourceType": "GMAudioGroup",
+      "resourceVersion": "1.0",
+      "name": "audiogroup_default",
+      "targets": -1
+    }
+  ],
+  "configs": {
+    "name": "Default",
+    "children": []
+  },
+  "defaultScriptType": 1,
+  "Folders": [
+    {"folderPath":"folders/Scripts.yy",  "order":0,"resourceType":"GMFolder","resourceVersion":"1.0","name":"Scripts"},
+    {"folderPath":"folders/Objects.yy",  "order":1,"resourceType":"GMFolder","resourceVersion":"1.0","name":"Objects"},
+    {"folderPath":"folders/Sprites.yy",  "order":2,"resourceType":"GMFolder","resourceVersion":"1.0","name":"Sprites"},
+    {"folderPath":"folders/Rooms.yy",    "order":3,"resourceType":"GMFolder","resourceVersion":"1.0","name":"Rooms"}
+  ],
+  "IncludedFiles": [],
+  "isEcma": false,
+  "LibraryEmitters": [],
+  "MetaData": {
+    "IDEVersion": "2022.11.1.70"
+  },
+  "Options": [],
+  "packageIndex": 0,
+  "resources": [
+    {"id":{"name":"scr_globals",      "path":"scripts/scr_globals/scr_globals.yy"},           "order":0},
+    {"id":{"name":"scr_math_utils",   "path":"scripts/scr_math_utils/scr_math_utils.yy"},     "order":1},
+    {"id":{"name":"scr_raycast",      "path":"scripts/scr_raycast/scr_raycast.yy"},           "order":2},
+    {"id":{"name":"scr_controller2d", "path":"scripts/scr_controller2d/scr_controller2d.yy"},"order":3},
+    {"id":{"name":"scr_player",       "path":"scripts/scr_player/scr_player.yy"},             "order":4},
+    {"id":{"name":"scr_platform",     "path":"scripts/scr_platform/scr_platform.yy"},         "order":5},
+    {"id":{"name":"par_solid",        "path":"objects/par_solid/par_solid.yy"},               "order":6},
+    {"id":{"name":"par_through",      "path":"objects/par_through/par_through.yy"},           "order":7},
+    {"id":{"name":"obj_solid",        "path":"objects/obj_solid/obj_solid.yy"},               "order":8},
+    {"id":{"name":"obj_through",      "path":"objects/obj_through/obj_through.yy"},           "order":9},
+    {"id":{"name":"obj_slope_right",  "path":"objects/obj_slope_right/obj_slope_right.yy"},   "order":10},
+    {"id":{"name":"obj_slope_left",   "path":"objects/obj_slope_left/obj_slope_left.yy"},     "order":11},
+    {"id":{"name":"obj_player",       "path":"objects/obj_player/obj_player.yy"},             "order":12},
+    {"id":{"name":"obj_platform",     "path":"objects/obj_platform/obj_platform.yy"},         "order":13},
+    {"id":{"name":"obj_camera",       "path":"objects/obj_camera/obj_camera.yy"},             "order":14},
+    {"id":{"name":"spr_player",       "path":"sprites/spr_player/spr_player.yy"},             "order":15},
+    {"id":{"name":"spr_platform",     "path":"sprites/spr_platform/spr_platform.yy"},         "order":16},
+    {"id":{"name":"spr_solid",        "path":"sprites/spr_solid/spr_solid.yy"},               "order":17},
+    {"id":{"name":"spr_through",      "path":"sprites/spr_through/spr_through.yy"},           "order":18},
+    {"id":{"name":"spr_slope_right",  "path":"sprites/spr_slope_right/spr_slope_right.yy"},   "order":19},
+    {"id":{"name":"spr_slope_left",   "path":"sprites/spr_slope_left/spr_slope_left.yy"},     "order":20},
+    {"id":{"name":"room_level",       "path":"rooms/room_level/room_level.yy"},               "order":21}
+  ],
+  "RoomOrder": [
+    {"name":"room_level","path":"rooms/room_level/room_level.yy"}
+  ],
+  "sequence": {
+    "resourceType": "GMSequence",
+    "resourceVersion": "1.4",
+    "name": "2DPlatformer_E13",
+    "autoRecord": true,
+    "backdropHeight": 768,
+    "backdropImageOpacity": 0.5,
+    "backdropImagePath": "",
+    "backdropWidth": 1366,
+    "backdropXOffset": 0,
+    "backdropYOffset": 0,
+    "events": {"resourceType":"KeyframeStore<MessageEventKeyframe>","resourceVersion":"1.0","Keyframes":[]},
+    "eventStubScript": null,
+    "eventToFunction": {},
+    "length": 1,
+    "lockOrigin": false,
+    "moments": {"resourceType":"KeyframeStore<MomentsEventKeyframe>","resourceVersion":"1.0","Keyframes":[]},
+    "playback": 1,
+    "playbackSpeed": 15,
+    "playbackSpeedType": 0,
+    "showBackdrop": true,
+    "showBackdropImage": false,
+    "timeUnits": 1,
+    "tracks": [],
+    "visibleRange": null,
+    "volume": 1,
+    "xorigin": 0,
+    "yorigin": 0
+  },
+  "tags": [],
+  "TextureGroups": [
+    {
+      "resourceType": "GMTextureGroup",
+      "resourceVersion": "1.0",
+      "name": "Default",
+      "autocrop": true,
+      "border": 2,
+      "compressFormat": "bz2",
+      "directory": "",
+      "groupParent": null,
+      "isScaled": true,
+      "loadType": "default",
+      "mipsToGenerate": 0,
+      "scaled": 1,
+      "targets": -1
+    }
+  ]
+}
