@@ -1,7 +1,7 @@
 /// @description Moving platform step.
 
 var dt = delta_time / 1000000;
-current_time += dt;
+platform_time += dt;
 
 origins = rc_update_origins(bbox_left, bbox_top, bbox_right, bbox_bottom);
 

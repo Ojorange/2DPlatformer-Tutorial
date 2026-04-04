@@ -12,7 +12,7 @@ function platform_ease(t) {
 /// @function platform_calculate_movement(dt)
 /// @desc Mirrors CalculatePlatformMovement(). Returns { vx, vy }.
 function platform_calculate_movement(dt) {
-    if (current_time < next_move_time) {
+    if (platform_time < next_move_time) {
         return { vx: 0, vy: 0 };
     }
 
@@ -50,7 +50,7 @@ function platform_calculate_movement(dt) {
                 }
             }
         }
-        next_move_time = current_time + wait_time;
+        next_move_time = platform_time + wait_time;
     }
 
     return { vx: new_x - x, vy: new_y - y };

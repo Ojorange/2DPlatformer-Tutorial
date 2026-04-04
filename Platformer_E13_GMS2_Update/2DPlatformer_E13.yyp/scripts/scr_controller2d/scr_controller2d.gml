@@ -138,7 +138,7 @@ function _vertical_collisions() {
             if (col_falling_through_platform)       continue;
             if (player_input_y == 1) {               // pressing DOWN to drop through
                 col_falling_through_platform = true;
-                alarm[0] = room_speed * 0.5;
+                alarm[0] = game_get_speed(gamespeed_fps) * 0.5;
                 continue;
             }
         }

@@ -35,4 +35,4 @@ v_ray_spacing = rs.vertical_ray_spacing;
 origins       = undefined;
 
 // ---- Timing ----
-current_time = 0;
+platform_time = 0;
