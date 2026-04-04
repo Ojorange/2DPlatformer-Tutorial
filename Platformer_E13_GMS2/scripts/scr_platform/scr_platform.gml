@@ -66,18 +66,17 @@ function platform_calculate_passenger_movement(vx, vy) {
     var dir_y = sign0(vy);
 
     // --- Vertically moving platform ---
+    // Use collision_line directly with obj_player since do_raycast only finds par_solid/par_through.
     if (vy != 0) {
         var rl = abs(vy) + SKIN_WIDTH;
         for (var i = 0; i < v_ray_count; i++) {
             var ry = (dir_y == 1) ? origins.bottom_left_y : origins.top_left_y;
             var rx = origins.top_left_x + v_ray_spacing * i;
 
-            var hit = do_raycast(rx, ry, 0, dir_y, rl);
-            // Only care about passenger objects (not solid geometry)
-            if (hit.hit && hit.distance != 0) {
-                var pid = hit.inst;
-                if (object_is_ancestor(pid.object_index, par_solid)) continue; // skip terrain
-                if (!object_is_ancestor(pid.object_index, obj_player) && pid.object_index != obj_player) continue;
+            var pid = collision_line(rx, ry, rx, ry + dir_y * rl, obj_player, false, false);
+            if (pid != noone) {
+                var dist = _ray_edge_distance(rx, ry, 0, dir_y, pid);
+                if (dist == 0) continue;
 
                 var already = false;
                 for (var k = 0; k < array_length(moved_ids); k++) {
@@ -86,7 +85,7 @@ function platform_calculate_passenger_movement(vx, vy) {
                 if (!already) {
                     array_push(moved_ids, pid);
                     var push_x = (dir_y == 1) ? vx : 0;
-                    var push_y = vy - (hit.distance - SKIN_WIDTH) * dir_y;
+                    var push_y = vy - (dist - SKIN_WIDTH) * dir_y;
                     array_push(passenger_list, {
                         inst:               pid,
                         push_x:             push_x,
@@ -106,11 +105,10 @@ function platform_calculate_passenger_movement(vx, vy) {
             var rx = (dir_x == -1) ? origins.bottom_left_x : origins.bottom_right_x;
             var ry = origins.bottom_left_y - h_ray_spacing * i;
 
-            var hit = do_raycast(rx, ry, dir_x, 0, rl);
-            if (hit.hit && hit.distance != 0) {
-                var pid = hit.inst;
-                if (object_is_ancestor(pid.object_index, par_solid)) continue;
-                if (!object_is_ancestor(pid.object_index, obj_player) && pid.object_index != obj_player) continue;
+            var pid = collision_line(rx, ry, rx + dir_x * rl, ry, obj_player, false, false);
+            if (pid != noone) {
+                var dist = _ray_edge_distance(rx, ry, dir_x, 0, pid);
+                if (dist == 0) continue;
 
                 var already = false;
                 for (var k = 0; k < array_length(moved_ids); k++) {
@@ -118,7 +116,7 @@ function platform_calculate_passenger_movement(vx, vy) {
                 }
                 if (!already) {
                     array_push(moved_ids, pid);
-                    var push_x = vx - (hit.distance - SKIN_WIDTH) * dir_x;
+                    var push_x = vx - (dist - SKIN_WIDTH) * dir_x;
                     var push_y = -SKIN_WIDTH;
                     array_push(passenger_list, {
                         inst:               pid,
@@ -132,19 +130,21 @@ function platform_calculate_passenger_movement(vx, vy) {
         }
     }
 
-    // --- Passengers riding on top (horizontal/downward platform) ---
-    if (dir_y == -1 || (vy == 0 && vx != 0)) {
+    // --- Passengers riding on top (platform moving down or horizontally) ---
+    // GMS2 Y-down: dir_y == 1 means moving DOWN.  The main vertical section above fires from
+    // the platform's BOTTOM edge when dir_y == 1, so it cannot see passengers on the TOP.
+    // This short upward-ray pass detects any player standing on top and carries them along.
+    if (dir_y == 1 || (vy == 0 && vx != 0)) {
         var rl = SKIN_WIDTH * 2;
         for (var i = 0; i < v_ray_count; i++) {
             // Cast upward from top edge (short ray to detect standing passengers)
             var rx = origins.top_left_x + v_ray_spacing * i;
             var ry = origins.top_left_y;
 
-            var hit = do_raycast(rx, ry, 0, -1, rl);
-            if (hit.hit && hit.distance != 0) {
-                var pid = hit.inst;
-                if (object_is_ancestor(pid.object_index, par_solid)) continue;
-                if (!object_is_ancestor(pid.object_index, obj_player) && pid.object_index != obj_player) continue;
+            var pid = collision_line(rx, ry, rx, ry - rl, obj_player, false, false);
+            if (pid != noone) {
+                var dist = _ray_edge_distance(rx, ry, 0, -1, pid);
+                if (dist == 0) continue;
 
                 var already = false;
                 for (var k = 0; k < array_length(moved_ids); k++) {

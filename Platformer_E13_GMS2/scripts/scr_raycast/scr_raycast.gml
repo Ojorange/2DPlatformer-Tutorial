@@ -90,7 +90,11 @@ function do_raycast(rx, ry, dir_x, dir_y, ray_length) {
 
     // --- Determine surface normal ---
     with (closest_inst) {
-        if (variable_instance_exists(id, "surf_normal_x")) {
+        // Use the stored surf_normal only for slope objects (surf_normal_x != 0).
+        // Flat solids store surf_normal_x = 0, which is the TOP-surface normal (0,-1).
+        // Using that for a horizontal ray produces slope_angle = 0°, wrongly triggering
+        // slope-climbing on flat walls.  Infer from the ray direction instead.
+        if (variable_instance_exists(id, "surf_normal_x") && surf_normal_x != 0) {
             result.normal_x = surf_normal_x;
             result.normal_y = surf_normal_y;
         } else {

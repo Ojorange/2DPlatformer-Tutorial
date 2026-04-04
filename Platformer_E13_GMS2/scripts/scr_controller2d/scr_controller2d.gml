@@ -79,8 +79,7 @@ function _horizontal_collisions() {
         var ry = origins.bottom_left_y - h_ray_spacing * i;
 
         var hit = do_raycast(rx, ry, dir_x, 0, ray_length);
-        if (!hit.hit)            continue;
-        if (hit.distance == 0)   continue;
+        if (!hit.hit) continue;
 
         var slope_angle = vec2_angle_from_up(hit.normal_x, hit.normal_y);
 
