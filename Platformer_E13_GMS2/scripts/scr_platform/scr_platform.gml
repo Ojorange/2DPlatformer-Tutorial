@@ -131,9 +131,9 @@ function platform_calculate_passenger_movement(vx, vy) {
     }
 
     // --- Passengers riding on top (platform moving down or horizontally) ---
-    // GMS2 Y-down: dir_y == 1 means moving DOWN.  When moving down or sideways the vertical
-    // section's rays fire away from the top surface, so we need this extra upward short-ray
-    // pass to detect and carry any player standing on top of the platform.
+    // GMS2 Y-down: dir_y == 1 means moving DOWN.  The main vertical section above fires from
+    // the platform's BOTTOM edge when dir_y == 1, so it cannot see passengers on the TOP.
+    // This short upward-ray pass detects any player standing on top and carries them along.
     if (dir_y == 1 || (vy == 0 && vx != 0)) {
         var rl = SKIN_WIDTH * 2;
         for (var i = 0; i < v_ray_count; i++) {
