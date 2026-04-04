@@ -5,8 +5,8 @@
 function smooth_damp(current, target, current_vel, smooth_time, dt) {
     smooth_time  = max(0.0001, smooth_time);
     var omega    = 2.0 / smooth_time;
-    var x        = omega * dt;
-    var exp_val  = 1.0 / (1.0 + x + 0.48 * x * x + 0.235 * x * x * x);
+    var omega_dt = omega * dt;
+    var exp_val  = 1.0 / (1.0 + omega_dt + 0.48 * omega_dt * omega_dt + 0.235 * omega_dt * omega_dt * omega_dt);
     var change   = current - target;
     var orig_to  = target;
     var temp     = (current_vel + omega * change) * dt;
